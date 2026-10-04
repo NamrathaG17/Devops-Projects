@@ -22,7 +22,10 @@ pipeline {
 
         stage('Testing Code') {
             steps{
-                bat 'pytest -v'
+                bat '''
+                    pip install -U pytest
+                    pytest -v
+                    '''
             }
         }
 
