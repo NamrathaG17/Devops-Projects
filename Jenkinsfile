@@ -8,13 +8,13 @@ pipeline {
     stages{
         stage('Install Dependencies') {
             steps{
-                sh """ pip install -r requirements.txt """
+                bat  " pip install -r requirements.txt "
             }
         }
 
         stage('Linting') {
             steps{
-                sh """ ruff check .
+                bat """ ruff check .
                 ruff check . --fix
                 """
             }
@@ -22,13 +22,13 @@ pipeline {
 
         stage('Build'){
             steps{
-                sh 'python main.py'
+                bat 'python main.py'
             }
         }
 
         stage('Testing Code') {
             steps{
-                sh 'pytest -v'
+                bat 'pytest -v'
             }
         }
 
