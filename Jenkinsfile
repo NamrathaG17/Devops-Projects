@@ -20,12 +20,6 @@ pipeline {
             }
         }
 
-        stage('Build'){
-            steps{
-                bat 'python main.py'
-            }
-        }
-
         stage('Testing Code') {
             steps{
                 bat 'pytest -v'
