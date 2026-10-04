@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment{
-        $IMAGE_NAME = 'devops-project'
+        IMAGE_NAME = 'devops-project'
     }
 
     stages{
