@@ -31,12 +31,14 @@ pipeline {
 
         stage('Build docker image') {
             steps{
+                echo 'This is the env variable: $IMAGE_NAME'
                 bat 'docker build -t ${IMAGE_NAME}  .'
             }
         }
 
         stage('Push docker image') {
             steps{
+                // bat 'docker login -u ${DockerUser} -p ${DockerPwd}'
                 bat 'docker tag devops-project bee17/devops-project:${BUILD_NUMBER}'
                 bat 'docker push bee17/devops-project:${BUILD_NUMBER}'
             }
