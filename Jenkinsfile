@@ -31,7 +31,8 @@ pipeline {
 
         stage('Build docker image') {
             steps{
-                echo 'This is the env variable: $IMAGE_NAME'
+                echo 'This is the env variable 1: $IMAGE_NAME'
+                echo 'This is the env variable 2: $BUILD_NUMBER'
                 bat 'docker build -t ${IMAGE_NAME}  .'
             }
         }
