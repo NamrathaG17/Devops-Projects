@@ -60,18 +60,17 @@ pipeline {
         }
         success {
             echo 'Pipeline completed successfully!'
-            emailext( 
-                        to: 'transformer1assemble@gmail.com',
-                        subject: "Jenkins build successfulNotification: ${currentBuild.fullDisplayName}",
-                        body: """
-                        The build finished with status: ${currentBuild.currentResult}
-                        Project: ${env.JOB_NAME}
-                        Build Number: ${env.BUILD_NUMBER}
-                        URL: ${env.BUILD_URL}
-                        """,
-                        from: 'jenkins-admin@gmail.com',
-                        mimeType: 'text/html'
-            )
+            mail to: 'transformer1assemble@gmail.com',
+                    subject: "Jenkins build successfulNotification: ${currentBuild.fullDisplayName}",
+                    body: """
+                    The build finished with status: ${currentBuild.currentResult}
+                    Project: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    URL: ${env.BUILD_URL}
+                    """,
+                    from: 'jenkins-admin@gmail.com',
+                    mimeType: 'text/html'
+            
         }
         failure {
             echo 'Pipeline failed. Check the logs.'
