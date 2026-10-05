@@ -61,9 +61,13 @@ pipeline {
         success {
             echo 'Pipeline completed successfully!'
             mail to: 'namrathag17@gmail.com',
-            subject: "Test build successful ${BUILD_NUMBER}"
-            body: "build successful"
-
+                subject: "Jenkins build successfulNotification: ${currentBuild.fullDisplayName}"
+                body: """
+                The build finished with status: ${currentBuild.currentResult}
+                Project: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                URL: ${env.BUILD_URL}
+                """
         }
         failure {
             echo 'Pipeline failed. Check the logs.'
