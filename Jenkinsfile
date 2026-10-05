@@ -3,6 +3,8 @@ pipeline {
 
     environment{
         IMAGE_NAME = 'devops-project'
+        DOCKER_UNAME = 'bee17'
+        TAG_VERSION = 'V1'
     }
 
     stages{
@@ -31,8 +33,8 @@ pipeline {
 
         stage('Build docker image') {
             steps{
-                echo 'This is the env variable 1: $IMAGE_NAME'
-                echo 'This is the env variable 2: $BUILD_NUMBER'
+                echo 'This is the env variable 1: ${IMAGE_NAME}'
+                echo 'This is the env variable 2: ${TAG_VERSION}'
                 bat 'docker build -t ${IMAGE_NAME}  .'
             }
         }
@@ -40,8 +42,8 @@ pipeline {
         stage('Push docker image') {
             steps{
                 // bat 'docker login -u ${DockerUser} -p ${DockerPwd}'
-                bat 'docker tag devops-project bee17/devops-project:${BUILD_NUMBER}'
-                bat 'docker push bee17/devops-project:${BUILD_NUMBER}'
+                bat 'docker tag ${IMAGE_NAME} ${DOCKER_UNAME}/devops-project:${TAG_VERSION}'
+                bat 'docker push ${DOCKER_UNAME}/${IMAGE_NAME}:${TAG_VERSION}'
             }
         }
     }
