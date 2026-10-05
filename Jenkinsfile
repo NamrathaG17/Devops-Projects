@@ -61,7 +61,7 @@ pipeline {
         success {
             echo 'Pipeline completed successfully!'
             emailext to: 'namrathag17@gmail.com',
-                        subject: "Jenkins build successfulNotification: ${currentBuild.fullDisplayName}"
+                        subject: "Jenkins build successfulNotification: ${currentBuild.fullDisplayName}",
                         body: """
                         The build finished with status: ${currentBuild.currentResult}
                         Project: ${env.JOB_NAME}
