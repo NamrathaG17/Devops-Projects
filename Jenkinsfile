@@ -41,9 +41,12 @@ pipeline {
 
         stage('Push docker image') {
             steps{
-                // bat 'docker login -u ${DockerUser} -p ${DockerPwd}'
-                bat "docker tag ${IMAGE_NAME} ${DOCKER_UNAME}/devops-project:${TAG_VERSION}"
-                bat "docker push ${DOCKER_UNAME}/${IMAGE_NAME}:${TAG_VERSION}"
+                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'dockerPwd', usernameVariable: 'dockerUname')]) {
+                    bat "docker login -u ${dockerUname} -p ${dockerPwd}"
+                    echo "login to ${dockerUname} is successfull using ${dockerPwd}"
+                    bat "docker tag ${IMAGE_NAME} ${DOCKER_UNAME}/devops-project:${TAG_VERSION}"
+                    bat "docker push ${DOCKER_UNAME}/${IMAGE_NAME}:${TAG_VERSION}"
+                }
             }
         }
     }
