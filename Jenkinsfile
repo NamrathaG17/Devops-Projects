@@ -53,10 +53,17 @@ pipeline {
 
     post {
         always {
+            cleanWs()
+            deleteDir()
+            bat 'docker logout'
             echo 'Cleaning up resources...'
         }
         success {
             echo 'Pipeline completed successfully!'
+            mail to: 'namrathag17@gmail.com',
+            subject: "Test build successful ${BUILD_NUMBER}"
+            body: "build successful"
+
         }
         failure {
             echo 'Pipeline failed. Check the logs.'
