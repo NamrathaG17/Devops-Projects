@@ -33,17 +33,17 @@ pipeline {
 
         stage('Build docker image') {
             steps{
-                echo 'This is the env variable 1: ${IMAGE_NAME} '
-                echo 'This is the env variable 2: ${TAG_VERSION} '
-                bat 'docker build ${IMAGE_NAME}  .'
+                echo "This is the env variable 1: ${IMAGE_NAME} "
+                echo "This is the env variable 2: ${TAG_VERSION} "
+                bat "docker build -t ${IMAGE_NAME}  ."
             }
         }
 
         stage('Push docker image') {
             steps{
                 // bat 'docker login -u ${DockerUser} -p ${DockerPwd}'
-                bat 'docker tag ${IMAGE_NAME} ${DOCKER_UNAME}/devops-project:${TAG_VERSION}'
-                bat 'docker push ${DOCKER_UNAME}/${IMAGE_NAME}:${TAG_VERSION}'
+                bat "docker tag ${IMAGE_NAME} ${DOCKER_UNAME}/devops-project:${TAG_VERSION}"
+                bat "docker push ${DOCKER_UNAME}/${IMAGE_NAME}:${TAG_VERSION}"
             }
         }
     }
