@@ -4,7 +4,7 @@ pipeline {
     environment{
         IMAGE_NAME = 'devops-project'
         DOCKER_UNAME = 'bee17'
-        TAG_VERSION = 'V4'
+        TAG_VERSION = 'V-4'
     }
 
     stages{
